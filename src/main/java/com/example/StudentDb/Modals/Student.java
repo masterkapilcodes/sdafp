@@ -15,7 +15,10 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     private String id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "contact", unique = true)
     private String contact;
 }
