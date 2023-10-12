@@ -1,5 +1,7 @@
 package com.example.StudentDb.Services;
 
+import com.example.StudentDb.Modals.Card;
+import com.example.StudentDb.Modals.CardStatus;
 import com.example.StudentDb.Modals.Student;
 import com.example.StudentDb.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,13 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
-    public void addStudent(Student student) {
+    public String addStudent(Student student) {
+        Card card = new Card();
+        card.setCardStatus(CardStatus.Activated);
+        card.setDues(4500);
+        student.setCard(card);
         studentRepository.save(student);
+        return "student added";
     }
 
     public Student getStudent(int id) {

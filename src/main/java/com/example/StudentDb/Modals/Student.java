@@ -21,4 +21,7 @@ public class Student {
     private String name;
     @Column(name = "contact", unique = true)
     private String contact;
+    @OneToOne(mappedBy = "studentVariableName", cascade = CascadeType.ALL)
+    private Card card;
+     private int jj;
 }

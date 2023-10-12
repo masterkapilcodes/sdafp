@@ -4,6 +4,9 @@ import com.example.StudentDb.Modals.Student;
 import com.example.StudentDb.Repository.StudentRepository;
 import com.example.StudentDb.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,25 +15,25 @@ public class StudentController {
     StudentService studentService;
 
     @PostMapping("/add")
-    public void addStudent(@RequestBody Student student){
-        studentService.addStudent(student);
+    public ResponseEntity<String> addStudent(@RequestBody Student student){
+        return new ResponseEntity<>(studentService.addStudent(student), HttpStatus.CREATED);
     }
     @GetMapping("/get/{id}")
-    public Student getStudent(@PathVariable("id") int id){
-        return studentService.getStudent(id);
+    public ResponseEntity<Student> getStudent(@PathVariable("id") int id){
+        return new ResponseEntity<>(studentService.getStudent(id), HttpStatus.FOUND);
     }
 //    @DeleteMapping("/delete/{id}")
 //    public void deleteStudent(@PathVariable("id") int id){
 //        studentService.deleteStudent(id);
 //    }
     @PutMapping("/update")
-    public Student update(@RequestParam int id, @RequestParam String name){
-        return studentService.updateStudent(id, name);
+    public ResponseEntity<Student> update(@RequestParam int id, @RequestParam String name){
+        return new ResponseEntity<>(studentService.updateStudent(id, name), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/delete")
-    public String delete(@RequestParam int id){
-        return studentService.deleteStudent2(id);
+    public ResponseEntity<String> delete(@RequestParam int id){
+        return new ResponseEntity<>(studentService.deleteStudent2(id), HttpStatus.OK);
     }
 
 //    @PutMapping("/updateid")
